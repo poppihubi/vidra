@@ -1,16 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { TasksProvider } from './src/hooks/useTasks';
 import { RootTabs } from './src/navigation/RootTabs';
 
 export default function App() {
   return (
-    <TasksProvider>
-      <SafeAreaView style={styles.container}>
-        <RootTabs />
-        <StatusBar style="auto" />
-      </SafeAreaView>
-    </TasksProvider>
+    <SafeAreaProvider>
+      <TasksProvider>
+        <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+          <RootTabs />
+          <StatusBar style="auto" />
+        </SafeAreaView>
+      </TasksProvider>
+    </SafeAreaProvider>
   );
 }
 
