@@ -12,6 +12,7 @@ export function TaskListScreen() {
       <Text style={styles.header}>Suas tarefas</Text>
       <AddTaskForm onAdd={addTask} />
       <FlatList
+        style={styles.list}
         data={tasks}
         keyExtractor={(t) => t.id}
         renderItem={({ item }) => (
@@ -27,6 +28,7 @@ export function TaskListScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#f4f4f4' },
+  list: { flex: 1 },
   header: { fontSize: 22, fontWeight: '700', marginBottom: 12, color: '#222' },
   empty: { textAlign: 'center', color: '#999', marginTop: 24 },
 });
