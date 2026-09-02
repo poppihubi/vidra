@@ -3,18 +3,17 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TaskListScreen } from '../screens/TaskListScreen';
 import { MatrixScreen } from '../screens/MatrixScreen';
 import { RecapScreen } from '../screens/RecapScreen';
+import { EnergyDashboardScreen } from '../screens/EnergyDashboardScreen';
 
-type Tab = 'tasks' | 'matrix' | 'recap';
+type Tab = 'tasks' | 'matrix' | 'energy' | 'recap';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'tasks', label: 'Tarefas' },
   { key: 'matrix', label: 'Matriz' },
+  { key: 'energy', label: 'Energia' },
   { key: 'recap', label: 'Recap' },
 ];
 
-// MVP usa um seletor de abas simples em vez de @react-navigation, pra manter
-// o scaffold inicial leve. Trocar por react-navigation/bottom-tabs é
-// direto quando o app crescer (rotas nomeadas, deep links, etc.).
 export function RootTabs() {
   const [tab, setTab] = useState<Tab>('tasks');
 
@@ -23,6 +22,7 @@ export function RootTabs() {
       <View style={styles.content}>
         {tab === 'tasks' && <TaskListScreen />}
         {tab === 'matrix' && <MatrixScreen />}
+        {tab === 'energy' && <EnergyDashboardScreen />}
         {tab === 'recap' && <RecapScreen />}
       </View>
       <View style={styles.tabBar}>
