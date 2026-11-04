@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Quadrant, QUADRANT_LABELS, QUADRANT_ORDER } from '../types/task';
+import { colors, radius } from '../theme';
 
 interface Props {
   onAdd: (title: string, quadrant: Quadrant) => void;
@@ -22,6 +23,7 @@ export function AddTaskForm({ onAdd }: Props) {
       <TextInput
         style={styles.input}
         placeholder="Nova tarefa (trabalho ou pessoal)"
+        placeholderTextColor={colors.textFaint}
         value={title}
         onChangeText={setTitle}
         onSubmitEditing={submit}
@@ -50,28 +52,31 @@ export function AddTaskForm({ onAdd }: Props) {
 const styles = StyleSheet.create({
   container: { marginBottom: 16 },
   input: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingHorizontal: 14,
+    paddingVertical: 11,
     fontSize: 15,
+    color: colors.text,
     marginBottom: 8,
   },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginBottom: 8 },
   chip: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 16,
-    backgroundColor: '#eee',
+    borderRadius: radius.pill,
+    backgroundColor: colors.primarySoft,
   },
-  chipActive: { backgroundColor: '#333' },
-  chipText: { fontSize: 12, color: '#555' },
-  chipTextActive: { color: '#fff' },
+  chipActive: { backgroundColor: colors.primary },
+  chipText: { fontSize: 12, color: colors.primary },
+  chipTextActive: { color: '#fff', fontWeight: '600' },
   button: {
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-    paddingVertical: 10,
+    backgroundColor: colors.accent,
+    borderRadius: radius.md,
+    paddingVertical: 12,
     alignItems: 'center',
   },
-  buttonText: { color: '#fff', fontWeight: '600' },
+  buttonText: { color: '#fff', fontWeight: '700' },
 });

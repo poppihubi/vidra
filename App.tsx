@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { TasksProvider } from './src/hooks/useTasks';
 import { RootTabs } from './src/navigation/RootTabs';
+import { colors } from './src/theme';
 
 export default function App() {
   return (
@@ -10,7 +11,7 @@ export default function App() {
       <TasksProvider>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <RootTabs />
-          <StatusBar style="auto" />
+          <StatusBar style="dark" />
         </SafeAreaView>
       </TasksProvider>
     </SafeAreaProvider>
@@ -20,6 +21,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: colors.bg,
   },
 });

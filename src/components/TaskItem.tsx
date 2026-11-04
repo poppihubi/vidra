@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Task } from '../types/task';
+import { colors, radius } from '../theme';
 
 interface Props {
   task: Task;
@@ -35,10 +36,12 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    backgroundColor: '#fff',
-    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
     marginBottom: 8,
   },
   checkboxArea: { flexDirection: 'row', alignItems: 'center', flex: 1 },
@@ -47,15 +50,15 @@ const styles = StyleSheet.create({
     height: 22,
     borderRadius: 11,
     borderWidth: 2,
-    borderColor: '#999',
-    marginRight: 10,
+    borderColor: colors.textFaint,
+    marginRight: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxDone: { backgroundColor: '#4CAF50', borderColor: '#4CAF50' },
+  checkboxDone: { backgroundColor: colors.primary, borderColor: colors.primary },
   checkmark: { color: '#fff', fontSize: 12, fontWeight: 'bold' },
-  title: { fontSize: 15, color: '#222' },
-  titleDone: { textDecorationLine: 'line-through', color: '#999' },
-  description: { fontSize: 12, color: '#777', marginTop: 2 },
-  remove: { fontSize: 16, color: '#c33', paddingHorizontal: 6 },
+  title: { fontSize: 15, color: colors.text },
+  titleDone: { textDecorationLine: 'line-through', color: colors.textFaint },
+  description: { fontSize: 12, color: colors.textMuted, marginTop: 2 },
+  remove: { fontSize: 16, color: colors.textFaint, paddingHorizontal: 6 },
 });

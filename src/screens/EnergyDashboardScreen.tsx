@@ -3,6 +3,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SwipeToDeleteRow } from '../components/SwipeToDeleteRow';
 import { useTasks } from '../hooks/useTasks';
 import { ENERGY_ZONE_LABELS } from '../types/task';
+import { colors, radius } from '../theme';
 
 export function EnergyDashboardScreen() {
   const { tasks, toggleTask, removeTask } = useTasks();
@@ -103,73 +104,73 @@ export function EnergyDashboardScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: '#f4f4f4' },
+  screen: { flex: 1, backgroundColor: colors.bg },
   content: { padding: 16 },
-  header: { fontSize: 22, fontWeight: '700', color: '#222' },
-  subheader: { fontSize: 13, color: '#888', marginBottom: 16 },
+  header: { fontSize: 26, fontWeight: '700', color: colors.text },
+  subheader: { fontSize: 13, color: colors.textMuted, marginBottom: 16 },
 
   powerZone: {
-    backgroundColor: '#fff6da',
-    borderWidth: 2,
-    borderColor: '#f0b90b',
-    borderRadius: 18,
+    backgroundColor: colors.primary,
+    borderRadius: radius.lg,
     padding: 18,
     marginBottom: 14,
-    shadowColor: '#f0b90b',
-    shadowOpacity: 0.3,
+    shadowColor: colors.primaryDark,
+    shadowOpacity: 0.25,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
     elevation: 4,
   },
   powerEmoji: { fontSize: 26, marginBottom: 2 },
-  powerTitle: { fontSize: 19, fontWeight: '800', color: '#7a5b00' },
-  powerDescription: { fontSize: 12, color: '#8a6d1a', marginBottom: 10 },
-  powerEmpty: { fontSize: 12, color: '#a98f3b', fontStyle: 'italic' },
+  powerTitle: { fontSize: 20, fontWeight: '800', color: '#fff' },
+  powerDescription: { fontSize: 12, color: '#CFE6DC', marginBottom: 10 },
+  powerEmpty: { fontSize: 12, color: '#CFE6DC', fontStyle: 'italic' },
   powerTask: {
     backgroundColor: '#ffffff',
-    borderRadius: 10,
+    borderRadius: radius.sm + 2,
     paddingVertical: 10,
     paddingHorizontal: 12,
     marginBottom: 6,
   },
-  powerTaskText: { fontSize: 14, fontWeight: '600', color: '#5c4600' },
+  powerTaskText: { fontSize: 14, fontWeight: '600', color: colors.primaryDark },
 
   focusZone: {
-    backgroundColor: '#fff',
-    borderRadius: 14,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md + 2,
+    borderWidth: 1,
+    borderColor: colors.border,
     padding: 14,
     marginBottom: 14,
   },
-  focusTitle: { fontSize: 15, fontWeight: '700', color: '#2b2b2b' },
-  focusDescription: { fontSize: 11, color: '#888', marginBottom: 8 },
-  zoneEmpty: { fontSize: 12, color: '#aaa', fontStyle: 'italic' },
+  focusTitle: { fontSize: 15, fontWeight: '700', color: colors.accent },
+  focusDescription: { fontSize: 11, color: colors.textMuted, marginBottom: 8 },
+  zoneEmpty: { fontSize: 12, color: colors.textFaint, fontStyle: 'italic' },
   focusTask: {
-    backgroundColor: '#f0f4ff',
-    borderRadius: 8,
+    backgroundColor: colors.accentSoft,
+    borderRadius: radius.sm,
     paddingVertical: 8,
     paddingHorizontal: 10,
     marginBottom: 5,
   },
-  focusTaskText: { fontSize: 13, color: '#333' },
+  focusTaskText: { fontSize: 13, color: colors.text },
 
   smallRow: { flexDirection: 'row', gap: 10 },
   distractionZone: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 12,
+    backgroundColor: colors.personalSoft,
+    borderRadius: radius.md,
     padding: 10,
-    opacity: 0.85,
+    opacity: 0.9,
   },
   trashZone: {
     flex: 1,
-    backgroundColor: '#eee',
-    borderRadius: 12,
+    backgroundColor: '#E7EBE6',
+    borderRadius: radius.md,
     padding: 10,
-    opacity: 0.85,
+    opacity: 0.9,
   },
-  smallTitle: { fontSize: 11, fontWeight: '700', color: '#666', marginBottom: 6 },
-  smallEmpty: { fontSize: 11, color: '#bbb' },
-  smallTaskText: { fontSize: 11, color: '#555', paddingVertical: 3 },
+  smallTitle: { fontSize: 11, fontWeight: '700', color: colors.textMuted, marginBottom: 6 },
+  smallEmpty: { fontSize: 11, color: colors.textFaint },
+  smallTaskText: { fontSize: 11, color: colors.text, paddingVertical: 3 },
 
-  tip: { textAlign: 'center', fontSize: 11, color: '#999', marginTop: 14 },
+  tip: { textAlign: 'center', fontSize: 11, color: colors.textFaint, marginTop: 14 },
 });

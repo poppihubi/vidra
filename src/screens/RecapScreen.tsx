@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useTasks } from '../hooks/useTasks';
+import { colors, radius } from '../theme';
 
 export function RecapScreen() {
   const { stats } = useTasks();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Seu recap da semana</Text>
+    <ScrollView style={styles.screen} contentContainerStyle={styles.container}>
+      <Text style={styles.header}>Recap</Text>
+      <Text style={styles.subheader}>Sua semana em números.</Text>
 
       <View style={styles.cardsRow}>
         <StatCard label="Pontos" value={stats.points} />
@@ -21,14 +23,14 @@ export function RecapScreen() {
       </View>
 
       <View style={styles.futureBox}>
-        <Text style={styles.futureTitle}>Em breve: insights de equilíbrio de vida</Text>
+        <Text style={styles.futureTitle}>Em breve: equilíbrio de vida</Text>
         <Text style={styles.futureText}>
           Depois de mais dados de uso, esta área vai mostrar sinais de sobrecarga
           (ex: "trabalho aumentando essa semana") — uma feature premium, disponível
           via assinatura.
         </Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -42,28 +44,37 @@ function StatCard({ label, value }: { label: string; value: number }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#f4f4f4' },
-  header: { fontSize: 22, fontWeight: '700', marginBottom: 16, color: '#222' },
+  screen: { flex: 1, backgroundColor: colors.bg },
+  container: { padding: 16 },
+  header: { fontSize: 26, fontWeight: '700', color: colors.text },
+  subheader: { fontSize: 13, color: colors.textMuted, marginBottom: 16 },
   cardsRow: { flexDirection: 'row', gap: 10, marginBottom: 16 },
   statCard: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 12,
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: colors.border,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  statValue: { fontSize: 24, fontWeight: '800', color: '#4CAF50' },
-  statLabel: { fontSize: 12, color: '#777', marginTop: 4 },
-  card: { backgroundColor: '#fff', borderRadius: 12, padding: 16, marginBottom: 16 },
-  cardTitle: { fontSize: 14, color: '#555', marginBottom: 6 },
-  bigNumber: { fontSize: 32, fontWeight: '800', color: '#222' },
-  futureBox: {
-    backgroundColor: '#eef6ee',
-    borderRadius: 12,
-    padding: 16,
+  statValue: { fontSize: 26, fontWeight: '800', color: colors.primary },
+  statLabel: { fontSize: 12, color: colors.textMuted, marginTop: 4 },
+  card: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
     borderWidth: 1,
-    borderColor: '#cde5cd',
+    borderColor: colors.border,
+    padding: 16,
+    marginBottom: 16,
   },
-  futureTitle: { fontSize: 14, fontWeight: '700', color: '#2e6b2e', marginBottom: 4 },
-  futureText: { fontSize: 12, color: '#3f6b3f', lineHeight: 18 },
+  cardTitle: { fontSize: 14, color: colors.textMuted, marginBottom: 6 },
+  bigNumber: { fontSize: 34, fontWeight: '800', color: colors.text },
+  futureBox: {
+    backgroundColor: colors.personalSoft,
+    borderRadius: radius.md,
+    padding: 16,
+  },
+  futureTitle: { fontSize: 14, fontWeight: '700', color: colors.personal, marginBottom: 4 },
+  futureText: { fontSize: 12, color: colors.text, lineHeight: 18 },
 });
