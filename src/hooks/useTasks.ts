@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
-import { Task, Quadrant } from '../types/task';
+import { Task, Quadrant, TaskArea } from '../types/task';
 
 // MVP: estado em memória, compartilhado via Context. Quando o backend
 // (Supabase/Firebase) for definido, o provider passa a sincronizar com ele
@@ -13,7 +13,7 @@ function nextId() {
 
 interface TasksContextValue {
   tasks: Task[];
-  addTask: (title: string, quadrant: Quadrant, description?: string) => void;
+  addTask: (title: string, quadrant: Quadrant, area?: TaskArea, description?: string) => void;
   toggleTask: (id: string) => void;
   removeTask: (id: string) => void;
   stats: {
@@ -29,12 +29,18 @@ const TasksContext = createContext<TasksContextValue | null>(null);
 export function TasksProvider({ children }: { children: React.ReactNode }) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  function addTask(title: string, quadrant: Quadrant, description?: string) {
+  function addTask(
+    title: string,
+    quadrant: Quadrant,
+    area: TaskArea = 'personal',
+    description?: string,
+  ) {
     const task: Task = {
       id: nextId(),
       title,
       description,
       quadrant,
+      area,
       completed: false,
       createdAt: new Date().toISOString(),
     };

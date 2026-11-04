@@ -4,14 +4,27 @@ export type Quadrant =
   | 'urgent-not-important' // Delegar
   | 'neither'; // Eliminar
 
+// Área da vida: o Vidra junta trabalho e vida pessoal no mesmo lugar.
+export type TaskArea = 'work' | 'personal';
+
 export interface Task {
   id: string;
   title: string;
   description?: string;
   quadrant: Quadrant;
+  area?: TaskArea; // tarefas antigas não têm; contam como 'personal'
   completed: boolean;
   createdAt: string; // ISO date
   completedAt?: string; // ISO date
+}
+
+export const AREA_LABELS: Record<TaskArea, string> = {
+  work: 'Trabalho',
+  personal: 'Vida pessoal',
+};
+
+export function areaOf(task: Task): TaskArea {
+  return task.area ?? 'personal';
 }
 
 export const QUADRANT_LABELS: Record<Quadrant, { title: string; hint: string }> = {
@@ -28,6 +41,10 @@ export const QUADRANT_ORDER: Quadrant[] = [
   'neither',
 ];
 
+// Mesmos 4 quadrantes de sempre, com outra roupagem: em vez de falar de
+// "prioridade", o Painel de Energia fala de onde o combustível do dia está
+// indo. Usado só pela EnergyDashboardScreen — a Matriz "clássica" continua
+// usando QUADRANT_LABELS.
 export const ENERGY_ZONE_LABELS: Record<Quadrant, { emoji: string; title: string; description: string }> = {
   'important-not-urgent': {
     emoji: '⚡',

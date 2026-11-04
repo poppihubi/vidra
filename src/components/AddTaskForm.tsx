@@ -1,20 +1,29 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Quadrant, QUADRANT_LABELS, QUADRANT_ORDER } from '../types/task';
+import {
+  AREA_LABELS,
+  Quadrant,
+  QUADRANT_LABELS,
+  QUADRANT_ORDER,
+  TaskArea,
+} from '../types/task';
 import { colors, radius } from '../theme';
 
 interface Props {
-  onAdd: (title: string, quadrant: Quadrant) => void;
+  onAdd: (title: string, quadrant: Quadrant, area: TaskArea) => void;
 }
+
+const AREAS: TaskArea[] = ['work', 'personal'];
 
 export function AddTaskForm({ onAdd }: Props) {
   const [title, setTitle] = useState('');
   const [quadrant, setQuadrant] = useState<Quadrant>('important-not-urgent');
+  const [area, setArea] = useState<TaskArea>('personal');
 
   function submit() {
     const trimmed = title.trim();
     if (!trimmed) return;
-    onAdd(trimmed, quadrant);
+    onAdd(trimmed, quadrant, area);
     setTitle('');
   }
 
@@ -30,11 +39,34 @@ export function AddTaskForm({ onAdd }: Props) {
         returnKeyType="done"
       />
       <View style={styles.chips}>
+        {AREAS.map((a) => (
+          <Pressable
+            key={a}
+            onPress={() => setArea(a)}
+            style={[
+              styles.chip,
+              a === 'work' ? styles.chipWork : styles.chipPersonal,
+              area === a && (a === 'work' ? styles.chipWorkActive : styles.chipPersonalActive),
+            ]}
+          >
+            <Text
+              style={[
+                styles.chipText,
+                { color: a === 'work' ? colors.primary : colors.personal },
+                area === a && styles.chipTextActive,
+              ]}
+            >
+              {AREA_LABELS[a]}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+      <View style={styles.chips}>
         {QUADRANT_ORDER.map((q) => (
           <Pressable
             key={q}
             onPress={() => setQuadrant(q)}
-            style={[styles.chip, quadrant === q && styles.chipActive]}
+            style={[styles.chip, styles.chipQuadrant, quadrant === q && styles.chipQuadrantActive]}
           >
             <Text style={[styles.chipText, quadrant === q && styles.chipTextActive]}>
               {QUADRANT_LABELS[q].hint}
@@ -67,10 +99,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: radius.pill,
-    backgroundColor: colors.primarySoft,
   },
-  chipActive: { backgroundColor: colors.primary },
-  chipText: { fontSize: 12, color: colors.primary },
+  chipWork: { backgroundColor: colors.primarySoft },
+  chipWorkActive: { backgroundColor: colors.primary },
+  chipPersonal: { backgroundColor: colors.personalSoft },
+  chipPersonalActive: { backgroundColor: colors.personal },
+  chipQuadrant: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
+  chipQuadrantActive: { backgroundColor: colors.text, borderColor: colors.text },
+  chipText: { fontSize: 12, color: colors.textMuted },
   chipTextActive: { color: '#fff', fontWeight: '600' },
   button: {
     backgroundColor: colors.accent,
